@@ -12,21 +12,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
+import javax.persistence.Table;
 
-import com.example.commons_alumnos.alumnos.models.entity.Alumno;
+import com.example.commons_alumnos.alumnos.models.entity.Student;
 
-@Entity(name="cursos")
-public class Curso {
+@Entity
+@Table(name="course")
+public class Course {
 
 	@Id
-	@Column(name="curso_id")
+	@Column(name="course_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long cursoId;
+	private Long courseId;
 	
 	private String name;
 	
 	@OneToMany(fetch=FetchType.LAZY)
-	private Set<Alumno> students;
+	private Set<Student> students;
 
 	@Column(name="create_at")
 	private Date createAt;
@@ -36,16 +38,16 @@ public class Curso {
 	    this.createAt = new Date();
 	}
 	
-	public Curso() {
-		this.students = new HashSet<Alumno>();
+	public Course() {
+		this.students = new HashSet<Student>();
 	}
 
-	public Long getCursoId() {
-		return cursoId;
+	public Long getCurseId() {
+		return courseId;
 	}
 
-	public void setCursoId(Long cursoId) {
-		this.cursoId = cursoId;
+	public void setCourseId(Long courseId) {
+		this.courseId = courseId;
 	}
 
 	public String getName() {
@@ -65,19 +67,19 @@ public class Curso {
 	}
 	
 	
-	public Set<Alumno> getStudents() {
+	public Set<Student> getStudents() {
 		return students;
 	}
 
-	public void setStudents(Set<Alumno> students) {
+	public void setStudents(Set<Student> students) {
 		this.students = students;
 	}
 	
-	public void addStudent(Alumno student) {
+	public void addStudent(Student student) {
 		this.students.add(student);
 	}
 	
-	public void removeStudent(Alumno student) {
+	public void removeStudent(Student student) {
 		this.students.remove(student);
 	}
 }

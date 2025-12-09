@@ -13,13 +13,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.PrePersist;
 
 @Entity
-@Table(name = "alumnos")
-public class Alumno {
+@Table(name = "student")
+public class Student {
 
     @Id
-    @Column(name = "alumno_id")
+    @Column(name = "student_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long alumnoId;
+    private Long studentId;
 
     private String name;
 
@@ -35,12 +35,12 @@ public class Alumno {
         this.createAt = new Date();
     }
 
-    public Long getAlumnoId() {
-        return alumnoId;
+    public Long getStudentId() {
+        return studentId;
     }
 
-    public void setAlumnoId(Long alumnoId) {
-        this.alumnoId = alumnoId;
+    public void setStudentId(Long studentId) {
+        this.studentId = studentId;
     }
 
     public String getName() {
@@ -77,7 +77,7 @@ public class Alumno {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(alumnoId);
+		return Objects.hash(studentId);
 	}
 
 	@Override
@@ -85,7 +85,7 @@ public class Alumno {
 		if (this == obj)
 			return true;
 		
-		if(!(obj instanceof Alumno))
+		if(!(obj instanceof Student))
 			return false;
 		
 		if (obj == null)
@@ -94,8 +94,8 @@ public class Alumno {
 		if (getClass() != obj.getClass())
 			return false;
 		
-		Alumno objectToStudent = (Alumno) obj;
-		return objectToStudent.getAlumnoId() != null && objectToStudent.getAlumnoId().equals(this.getAlumnoId());
+		Student objectToStudent = (Student) obj;
+		return objectToStudent.getStudentId() != null && objectToStudent.getStudentId().equals(this.getStudentId());
 	}
     
     

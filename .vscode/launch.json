@@ -1,0 +1,45 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-MicroserviciosUsuariosApplication<microservicios_usuarios>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.microservicios_usuarios.MicroserviciosUsuariosApplication",
+            "projectName": "microservicios_usuarios",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=49222 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=microservicios_usuarios"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-MicroserviciosCursosApplication<microservicios-cursos>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.microservicios_cursos.app.cursos.MicroserviciosCursosApplication",
+            "projectName": "microservicios-cursos",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-MicroserviciosZuulApplication<microservicios-zuul>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.microservicios_zuul.app.zuul.MicroserviciosZuulApplication",
+            "projectName": "microservicios-zuul",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-MicroserviciosEurekaApplication<microservicios_eureka>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.microservicios_eureka.app.eureka.MicroserviciosEurekaApplication",
+            "projectName": "microservicios_eureka",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
