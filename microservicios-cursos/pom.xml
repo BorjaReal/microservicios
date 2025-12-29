@@ -42,8 +42,16 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-	
 	<dependencies>
+		<dependency>
+			<groupId>com.example</groupId>
+			<artifactId>commons_exams</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>com.example</groupId>
 			<artifactId>commons-microservicios</artifactId>
@@ -66,6 +74,7 @@
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>mssql-jdbc</artifactId>
+			<version>12.6.2.jre11</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
@@ -82,6 +91,10 @@
 			<artifactId>commons_alumnos</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
         </dependency>
+		<dependency>
+    		<groupId>org.springframework.cloud</groupId>
+    		<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

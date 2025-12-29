@@ -1,11 +1,17 @@
 package com.example.commons_microservicios.commons.controllers;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.naming.Binding;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 
 import com.example.commons_microservicios.commons.service.CommonService;
 
@@ -25,29 +31,41 @@ public class CommonController<E, S extends CommonService<E>> {
         return ResponseEntity.ok(service.findAll());
     }
 
+    @GetMapping("/pageable")
+    public ResponseEntity<?> findAll(Pageable pageable) {
+        return ResponseEntity.ok(service.findPage(pageable));
+    }
+
     @GetMapping("{id}")
     public ResponseEntity<?> findById(@PathVariable Long id) {
-        Optional<?> alumno = service.findById(id);
-        return alumno.isPresent() ? 
-            ResponseEntity.ok(alumno.get()) : ResponseEntity.notFound().build();
+        Optional<?> entity = service.findById(id);
+        return entity.isPresent() ? 
+            ResponseEntity.ok(entity.get()) : ResponseEntity.notFound().build();
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody E entity) {
-        Optional<E> savedAlumno = service.save(entity);
-        if (savedAlumno.isEmpty()) {
-            return ResponseEntity.badRequest().build();
+    public ResponseEntity<?> create(@Valid @RequestBody E entity, BindingResult result) {
+        if(result.hasErrors()) {
+            return validate(result);
         }
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedAlumno.get());
+        Optional<E> savedEntity = service.save(entity);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedEntity.get());
     }
 
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
-        Optional<E> existingAlumno = service.findById(id);
-        if (existingAlumno.isEmpty())
+        Optional<E> entityFromDB = service.findById(id);
+        if (entityFromDB.isEmpty())
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", "El elemento a borrar no existe"));
         service.deleteById(id);
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    protected ResponseEntity<?> validate(BindingResult result) {
+        Map<String, Object> errors = new HashMap<>();
+        result.getFieldErrors().forEach(err -> 
+            errors.put(err.getField(), "El campo '" + err.getField() + "' " + err.getDefaultMessage()));
+        return ResponseEntity.badRequest().body(errors);
     }
 }

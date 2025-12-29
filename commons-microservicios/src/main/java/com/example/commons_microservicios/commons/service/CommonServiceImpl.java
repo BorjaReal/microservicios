@@ -3,11 +3,13 @@ package com.example.commons_microservicios.commons.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 
-public class CommonServiceImpl<E, R extends CrudRepository<E, Long>> implements CommonService<E> {
+public class CommonServiceImpl<E, R extends PagingAndSortingRepository<E, Long>> implements CommonService<E> {
 
     @Autowired
     protected R commonRepository;
@@ -20,14 +22,20 @@ public class CommonServiceImpl<E, R extends CrudRepository<E, Long>> implements 
 
     @Override
     @Transactional(readOnly = true)
+    public Page<E> findPage(Pageable pageable) {
+        return commonRepository.findAll(pageable);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public Optional<E> findById(Long id) {
         return commonRepository.findById(id);
     }
 
     @Override
     @Transactional
-    public Optional<E> save(E alumno) {
-       return Optional.of(commonRepository.save(alumno));
+    public Optional<E> save(E entity) {
+       return Optional.of(commonRepository.save(entity));
     }
 
     @Override

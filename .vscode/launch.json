@@ -19,7 +19,8 @@
             "mainClass": "com.example.microservicios_cursos.app.cursos.MicroserviciosCursosApplication",
             "projectName": "microservicios-cursos",
             "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=56015 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=microservicios-cursos"
         },
         {
             "type": "java",
@@ -29,7 +30,8 @@
             "mainClass": "com.example.microservicios_zuul.app.zuul.MicroserviciosZuulApplication",
             "projectName": "microservicios-zuul",
             "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=54518 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=microservicios-zuul"
         },
         {
             "type": "java",
@@ -38,6 +40,28 @@
             "cwd": "${workspaceFolder}",
             "mainClass": "com.example.microservicios_eureka.app.eureka.MicroserviciosEurekaApplication",
             "projectName": "microservicios_eureka",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=61455 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=microservicios_eureka"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-MicroserviciosExamenesApplication<microservicios_examenes>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.microservicios_examenes.app.examenes.MicroserviciosExamenesApplication",
+            "projectName": "microservicios_examenes",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=56137 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=microservicios_examenes"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-MicroserviciosRespuestasApplication<microservicios_respuestas>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.microservicios_respuestas.app.respuestas.MicroserviciosRespuestasApplication",
+            "projectName": "microservicios_respuestas",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }

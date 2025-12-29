@@ -6,7 +6,13 @@ import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,18 +27,30 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long studentId;
 
+    @NotBlank
     private String name;
 
+    @NotBlank
     private String lastname;
 
+    @Email
+    @NotBlank
     private String email;
 
     @Column(name = "create_at")
     private Date createAt;
 
+    @Lob
+    @JsonIgnore()
+    private byte[] photo;
+
     @PrePersist
     public void prePersist() {
         this.createAt = new Date();
+    } 
+
+    public Integer getPhotoHashCode(){
+        return (this.photo != null) ? this.photo.hashCode() : null;
     }
 
     public Long getStudentId() {
@@ -75,10 +93,21 @@ public class Student {
         this.createAt = createAt;
     }
 
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(studentId);
 	}
+
+    
 
 	@Override
 	public boolean equals(Object obj) {
@@ -96,7 +125,5 @@ public class Student {
 		
 		Student objectToStudent = (Student) obj;
 		return objectToStudent.getStudentId() != null && objectToStudent.getStudentId().equals(this.getStudentId());
-	}
-    
-    
+	}    
 }
