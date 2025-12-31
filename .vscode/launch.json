@@ -64,6 +64,16 @@
             "projectName": "microservicios_respuestas",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-MicroserviciosGatewayApplication<microservicios-gateway>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.microservicios_gateway.app.gateway.MicroserviciosGatewayApplication",
+            "projectName": "microservicios-gateway",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

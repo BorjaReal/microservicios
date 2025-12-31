@@ -1,11 +1,14 @@
 package com.example.microservicios_cursos.app.cursos.controllers;
 import java.util.Set;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -13,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.commons_alumnos.alumnos.models.entity.Student;
@@ -23,8 +25,25 @@ import com.example.microservicios_cursos.app.cursos.models.entities.Course;
 import com.example.microservicios_cursos.app.cursos.services.CursoService;
 
 @RestController
-@RequestMapping("/cursos")
 public class CursoController extends CommonController<Course, CursoService> {
+
+	@Value("${config.balanceador.test}")
+	private String balanceadorTest;
+
+
+	@Override
+	@GetMapping("/todos")
+	public ResponseEntity<?> findAll() {
+		return super.findAll();
+	}
+
+	@GetMapping("/balanceador-test")
+	public ResponseEntity<?> findBalancer() {
+		Map<String, Object> response = new HashMap<String, Object>();
+		response.put("balanceador.test", balanceadorTest);
+		response.put("cursos", service.findAll());
+		return ResponseEntity.ok(response);
+	}
 
 	@GetMapping("/student/{id}")
 	public ResponseEntity<?> getCursoByAlumnoId(@PathVariable Long id) {
@@ -95,8 +114,8 @@ public class CursoController extends CommonController<Course, CursoService> {
 		return ResponseEntity.status(HttpStatus.CREATED).body(this.service.save(confirmedCourse));
 	}
 	 
-	 @PutMapping("/{id}/remove-exam")
-	 public ResponseEntity<?> removeExam(@RequestBody Exam examCourse, @PathVariable Long id){
+	@PutMapping("/{id}/remove-exam")
+	public ResponseEntity<?> removeExam(@RequestBody Exam examCourse, @PathVariable Long id){
 		Optional<Course> courseDb = this.service.findById(id);
 		if(courseDb.isEmpty())
 			return ResponseEntity.notFound().build();
@@ -104,6 +123,6 @@ public class CursoController extends CommonController<Course, CursoService> {
 		confirmedCourse.removeExam(examCourse);
 		System.out.println(confirmedCourse.getExams().size());
 		return ResponseEntity.status(HttpStatus.CREATED).body(this.service.save(confirmedCourse));
-	 }
+	}
  	 
 }

@@ -14,11 +14,12 @@
         <module>commons-microservicios</module>
         <module>commons_exams</module>
         <module>microservicios_eureka</module>
-        <module>microservicios_usuarios</module>
+        <module>microservicios-usuarios</module>
         <module>microservicios-cursos</module>
         <module>microservicios-zuul</module>
-        <module>microservicios_examenes</module>
-        <module>microservicios_respuestas</module>
+        <module>microservicios-examenes</module>
+        <module>microservicios-respuestas</module>
+        <module>microservicios-gateway</module>
     </modules>
     <properties>
         <java.version>11</java.version>

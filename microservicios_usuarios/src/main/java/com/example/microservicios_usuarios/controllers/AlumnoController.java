@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 @RestController
-@RequestMapping("/alumnos")
+//@RequestMapping("/alumnos")
 public class AlumnoController extends CommonController<Student, AlumnoService> {
 
     @GetMapping("/uploads/img/{id}")
@@ -40,7 +40,6 @@ public class AlumnoController extends CommonController<Student, AlumnoService> {
         }
 
         Resource img = new ByteArrayResource(studentOpt.get().getPhoto());
-
         return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(img);
     }
     

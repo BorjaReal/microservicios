@@ -114,10 +114,7 @@ public class Student {
 		if (this == obj)
 			return true;
 		
-		if(!(obj instanceof Student))
-			return false;
-		
-		if (obj == null)
+		if(!(obj instanceof Student) || obj == null)
 			return false;
 		
 		if (getClass() != obj.getClass())

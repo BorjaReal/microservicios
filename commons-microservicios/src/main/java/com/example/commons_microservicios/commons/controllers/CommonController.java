@@ -3,8 +3,6 @@ package com.example.commons_microservicios.commons.controllers;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-
-import javax.naming.Binding;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
 
 public class CommonController<E, S extends CommonService<E>> {
 

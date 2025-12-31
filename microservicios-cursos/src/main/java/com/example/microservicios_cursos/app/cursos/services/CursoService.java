@@ -2,8 +2,6 @@ package com.example.microservicios_cursos.app.cursos.services;
 
 import java.util.Optional;
 
-import org.springframework.web.bind.annotation.PathVariable;
-
 import com.example.commons_microservicios.commons.service.CommonService;
 import com.example.microservicios_cursos.app.cursos.models.entities.Course;
 
