@@ -82,5 +82,3 @@ public class ExamController extends CommonController<Exam, ExamService> {
         return ResponseEntity.status(HttpStatus.CREATED).body(parentOpt.get());
     }
 }
-
-*/
