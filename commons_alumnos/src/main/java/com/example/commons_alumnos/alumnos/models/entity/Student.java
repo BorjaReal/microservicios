@@ -40,6 +40,10 @@ public class Student {
     @Column(name = "create_at")
     private Date createAt;
 
+    /**
+    * @Column(name = "photo")
+    * @Lob manage the binary data
+    */
     @Lob
     @JsonIgnore()
     private byte[] photo;
@@ -106,7 +110,6 @@ public class Student {
 	public int hashCode() {
 		return Objects.hash(studentId);
 	}
-
     
 
 	@Override

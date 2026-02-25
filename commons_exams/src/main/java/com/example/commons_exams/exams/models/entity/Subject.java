@@ -26,11 +26,17 @@ public class Subject {
 
     private String name;
 
+
+    /*
+        Many subjects can have only one parent
+        One parent can have many children
+        
+    */
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = {"children"}, allowSetters = true)
     private Subject parent;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy ="parent", cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = {"parent"}, allowSetters = true)
     private Set<Subject> children;
 
@@ -70,6 +76,13 @@ public class Subject {
         this.children = children;
     }
 
-    
+    public void addChild(Subject child) {
+        this.children.add(child);
+        child.setParent(this);
+    }
 
+    public void removeChild(Subject child) {
+        this.children.remove(child);
+        child.setParent(null);
+    }
 }

@@ -86,6 +86,7 @@ public class Exam {
     public boolean isAnswered() {
         return answered;
     }
+    
     public void setAnswered(boolean answered) {
         this.answered = answered;
     }

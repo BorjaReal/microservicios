@@ -1,5 +1,6 @@
 package com.example.microservicios_examenes.app.examenes.Controller;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -16,12 +17,15 @@ import com.example.commons_microservicios.commons.controllers.CommonController;
 import com.example.microservicios_examenes.app.examenes.Services.ExamService;
 import com.example.commons_exams.exams.models.entity.Exam;
 import com.example.commons_exams.exams.models.entity.Question;
+import com.example.commons_exams.exams.models.entity.Subject;
+
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
 @RestController
 public class ExamController extends CommonController<Exam, ExamService> {
+
     @GetMapping("/search/{term}")
     public ResponseEntity<?> searchByName(@PathVariable String term) {
         return ResponseEntity.ok(service.findByNameLike(term));
@@ -30,6 +34,7 @@ public class ExamController extends CommonController<Exam, ExamService> {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@Valid @RequestBody Exam exam, BindingResult result, @PathVariable Long id) {
+        
         if(result.hasErrors())
             return validate(result);
         
@@ -57,4 +62,25 @@ public class ExamController extends CommonController<Exam, ExamService> {
     public ResponseEntity<?> getSubjects() {
         return ResponseEntity.ok(service.findAllSubjects());
     }
+
+    /*
+    No necesitan validarse ya que se validan en el resto de servicios, solo añade.
+    */
+    @PutMapping("add-subsubject/{idParent}/{idChild}")
+    public ResponseEntity<?> addChild(@PathVariable Long idChild, @PathVariable Long idParent) {
+
+        if(idChild.equals(idParent))
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", "A subject cannot be a child of itself"));
+
+        Optional<Subject> parentOpt = service.findSubjectById(idParent);
+        Optional<Subject> childOpt = service.findSubjectById(idChild);
+        
+        if(parentOpt.isEmpty() || childOpt.isEmpty())
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "One of the subjects not found"));
+
+        parentOpt.get().addChild(childOpt.get());
+        return ResponseEntity.status(HttpStatus.CREATED).body(parentOpt.get());
+    }
 }
+
+*/

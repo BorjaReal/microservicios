@@ -38,8 +38,7 @@ public class CommonController<E, S extends CommonService<E>> {
     @GetMapping("{id}")
     public ResponseEntity<?> findById(@PathVariable Long id) {
         Optional<?> entity = service.findById(id);
-        return entity.isPresent() ? 
-            ResponseEntity.ok(entity.get()) : ResponseEntity.notFound().build();
+        return entity.isPresent() ? ResponseEntity.ok(entity.get()) : ResponseEntity.notFound().build();
     }
 
     @PostMapping

@@ -31,7 +31,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RestController
 //@RequestMapping("/alumnos")
 public class AlumnoController extends CommonController<Student, AlumnoService> {
-
     @GetMapping("/uploads/img/{id}")
     public ResponseEntity<?> viewPhoto(@PathVariable Long id) {
         Optional<Student> studentOpt = service.findById(id);

@@ -10,6 +10,14 @@ import com.example.commons_exams.exams.models.entity.Exam;
 
 public interface ExamRepository extends PagingAndSortingRepository<Exam, Long> {
 
+    @Query("SELECT e FROM Exam e WHERE e.name LIKE %?1%")
+    public List<Exam> findByNameLike(String term);
+}
+
+/* 
+public interface ExamRepository extends PagingAndSortingRepository<Exam, Long> {
+
     @Query("SELECT e FROM Exam e WHERE e.name LIKE %:term%")
     public List<Exam> findByNameLike(@Param("term") String term);
 }
+*/

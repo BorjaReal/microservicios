@@ -29,7 +29,11 @@ public class RespuestaContoller {
 
     @GetMapping("/student/{studentId}/exams-answered")
     public ResponseEntity<?> getExamsWithAnswersByStudent(@PathVariable Long studentId) {
+        
+        /** Devuelve los exámenes con respuestas para el alumno */
         Iterable<Long> examIds = service.findExamsAnsweredByStudent(studentId);
+        
+        
         if(examIds.iterator().hasNext()) 
             return ResponseEntity.ok(examIds);
         

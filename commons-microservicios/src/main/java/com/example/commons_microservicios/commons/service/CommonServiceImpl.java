@@ -42,6 +42,5 @@ public class CommonServiceImpl<E, R extends PagingAndSortingRepository<E, Long>>
     @Transactional
     public void deleteById(Long id) {
     	commonRepository.deleteById(id);
-        
     }
 }

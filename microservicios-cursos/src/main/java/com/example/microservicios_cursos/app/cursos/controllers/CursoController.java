@@ -45,12 +45,16 @@ public class CursoController extends CommonController<Course, CursoService> {
 		return ResponseEntity.ok(response);
 	}
 
+
+	
 	@GetMapping("/student/{id}")
 	public ResponseEntity<?> getCursoByAlumnoId(@PathVariable Long id) {
 		Optional<Course> courseOpt = this.service.findCourseByStudentId(id); //devuelve los cursos del alumno 
 		
 		if(!courseOpt.isEmpty()) {
 			Course course = courseOpt.get();
+			
+			
 			List<Long> examsIdAnsweredList = (List<Long>) service.findExamsAnsweredByStudent(id);
 
 			//mapeamos y obtenemos todos los examenes del curso
@@ -61,6 +65,7 @@ public class CursoController extends CommonController<Course, CursoService> {
 				}
 				return exam;
 			}).collect(Collectors.toSet());
+
 			course.setExams(exams);
 			return ResponseEntity.ok(course);
 		}
